@@ -26,7 +26,7 @@ public class ClienteDAO implements interfaceCliente {
     }
 
     @Override
-    public void salvar(Cliente cliente) {
+    public void adicionar(Cliente cliente) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
 
         Transaction t = null;
@@ -35,7 +35,6 @@ public class ClienteDAO implements interfaceCliente {
         } else {
             t = ss.getTransaction();
         }
-
         ss.save(cliente);
         t.commit();
 
@@ -47,8 +46,9 @@ public class ClienteDAO implements interfaceCliente {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = ss.beginTransaction();
         ss.delete(cliente);
-        t.commit();
-
+        t.commit(); 
+      
+        
     }
   
     @Override
@@ -71,5 +71,10 @@ public class ClienteDAO implements interfaceCliente {
         return lista;
 
     }
+
+    //@Override
+    //public void adicionar(Cliente cliente) {
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   // }
 
 }

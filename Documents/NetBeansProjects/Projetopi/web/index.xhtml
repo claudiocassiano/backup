@@ -4,28 +4,32 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-   
+
     <h:head> 
         <title>Corretora de Seguros Cassiano</title>
-      </h:head>
+    </h:head>
     <h:body>
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="150" >
                 <center><h1>C.S.C. <br/> Corretora de Seguros Cassiano</h1></center>
-                    </p:layoutUnit>
-            
-            <p:layoutUnit position="west" size="200" rendered="true" collapsible="true" resizable="true" closable="true" header="Menu">
-                     <h:form>
-                         <p:commandLink value="Novo Cliente" actionListener="#{clienteController.prepararAdicionarCliente(actionEvent)}" onclick="PF('dlgCliente').show()" />
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="200" rendered="true" collapsible="true" resizable="true" header="Menu">
+                <h:form>
+                    <p:commandLink value="Novo Cliente" 
+                                   oncomplete="PF('dlgCliente').show()" />
                 </h:form>
-       </p:layoutUnit>    
+                <h:form>
+                    <p:commandLink value="Veículo" /> 
+                </h:form>
+            </p:layoutUnit> 
 
             <p:layoutUnit position="center">
                 <h:form prependId="false">
                     <p:dialog id="dlgCliente" resizable="true" modal="false" visible="false" 
                               draggable="false" header="Cadastrar Cliente" height="250" width="400" widgetVar="dlgCliente" >
-                     
-                    <p:panelGrid columns="2">
+
+                        <p:panelGrid columns="2">
                             <h:outputText value ="Nome"/>
                             <p:inputText id="nome" value="#{clienteController.cliente.nome}"/>
 
@@ -38,13 +42,15 @@
                             <h:outputText value ="Telefone Celular"/>
                             <p:inputText id="celular" value="#{clienteController.cliente.celular}"/>
 
-                            <p:commandButton value="Salvar" id="salvar" actionListener="#{clienteController.setCliente(actionEvent)}"
-                                             update="cliente" oncomplete="dlgCliente.hide()"/>
+                            <p:commandButton value="Salvar" id="salva" action="#{clienteController.adicionar(clienteController.cliente)}"
+                                             update="@form" onsuccess="PF('dlgCliente').hide()"/>
+
                         </p:panelGrid>
-                    
-                </p:dialog>
-               
-                    <p:dataTable id="cliente" value="#{clienteController.listaCliente}" var="cliente">
+
+                    </p:dialog>
+
+                    <p:dataTable id="cliente" value="#{clienteController.listaCliente}" var="cliente"
+                                 rowKey="#{cliente.id}" selectionMode="single">
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
@@ -73,9 +79,11 @@
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <p:commandLink value="Excluir" action="#{clienteController.excluir}" 
-                                           onclick="if(!confirm('Deseja excluir o cliente #{cliente.nome}?')) return false;"
-                                           update="cliente"/> 
+                            <p:commandLink value="Excluir" action="#{clienteController.excluir(cliente)}" 
+                                           oncomplete="if (!confirm('Deseja excluir o cliente #{cliente.nome}?'))
+                                           return false;"
+                                           update="cliente">
+                            </p:commandLink> 
                         </p:column>
                     </p:dataTable>
                 </h:form>

@@ -25,6 +25,7 @@ public class Cliente implements Serializable {
     private String foneFixo;
     private String celular;
 
+    
     public Long getId() {
         return id;
     }

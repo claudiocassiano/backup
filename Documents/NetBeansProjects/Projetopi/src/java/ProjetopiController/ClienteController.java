@@ -36,7 +36,7 @@ public class ClienteController {
         return cliente;
     }
 
-    public void setCliente(ActionEvent actionEvent) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -48,20 +48,20 @@ public class ClienteController {
     }
 
     public void prepararAdicionarCliente(ActionEvent actionEvent) {
-       // cliente = new Cliente();
+        cliente = new Cliente();
     }
 
     public void prepararAlterarCliente(ActionEvent actionEvent) {
         cliente = (Cliente) (listaCliente.getRowData());
     }
 
-    public void adicionar() {
+    
+    public void adicionar(Cliente cliente) {
         interfaceCliente dao = new ClienteDAO();
-        dao.salvar(cliente);
-        cliente = new Cliente();
+        dao.adicionar(cliente);
+        this.cliente = new Cliente();
         
     }
-
     public void alterar(ActionEvent actionEvent) {
         interfaceCliente dao = new ClienteDAO();
         dao.atualizar(cliente);

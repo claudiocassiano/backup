@@ -7,7 +7,6 @@ package Projetopi.DAO;
 
 import Projetopi.model.Cliente;
 import java.util.List;
-
 /**
  *
  * @author Claudio Cassiano
@@ -16,7 +15,7 @@ public interface interfaceCliente {
 
     public Cliente getCliente(Long id);
 
-    public void salvar(Cliente cliente);
+    public void adicionar(Cliente cliente);
 
     public void excluir(Cliente cliente);
 
