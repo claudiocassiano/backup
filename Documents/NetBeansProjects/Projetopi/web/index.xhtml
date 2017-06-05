@@ -16,7 +16,7 @@
 
             <p:layoutUnit position="west" size="200" rendered="true" collapsible="true" resizable="true" header="Menu">
                 <h:form>
-                    <p:commandLink value="Novo Cliente" 
+                    <p:commandLink value="Cadastrar Cliente" 
                                    oncomplete="PF('dlgCliente').show()" />
                 </h:form>
                 <h:form>
@@ -77,13 +77,14 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Excluir"/>
+                                <h:outputText value="Excluir / Alterar"/>
                             </f:facet>
                             <p:commandLink value="Excluir" action="#{clienteController.excluir(cliente)}" 
                                            oncomplete="if (!confirm('Deseja excluir o cliente #{cliente.nome}?'))
                                            return false;"
                                            update="cliente">
                             </p:commandLink> 
+                
                         </p:column>
                     </p:dataTable>
                 </h:form>
