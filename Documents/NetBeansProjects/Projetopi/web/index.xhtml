@@ -79,9 +79,10 @@
                             <f:facet name="header">
                                 <h:outputText value="Excluir / Alterar"/>
                             </f:facet>
-                            <p:commandLink value="Excluir" action="#{clienteController.excluir(cliente)}" 
+                            <p:commandLink value="Excluir"  
                                            oncomplete="if (!confirm('Deseja excluir o cliente #{cliente.nome}?'))
                                            return false;"
+                                           action="#{clienteController.excluir(cliente)}"
                                            update="cliente">
                             </p:commandLink> 
                 
