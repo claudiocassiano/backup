@@ -79,14 +79,20 @@
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <p:commandButton value="Excluir" 
-                                           onclick="if (!confirm('Deseja excluir o cliente: #{cliente.nome}?'))
-                                           return false;"
-                                           update="cliente"
-                                action="#{clienteController.excluir(cliente)}">
-                            </p:commandButton> 
-
+                            <p:commandButton value="Excluir" onclick="mensagem.show()">
+                            <p:dialog width="400" modal="true" appendTo="@(body)">
+                                <h:form  prependId="true" id="dlgCliente">
+                                    <h:outputText value="Confirma a exclusão de: #{cliente.nome} ?" />
+                                    <h:panelGrid columns="2">
+                                        <p:commandLink value="Sim" actionListener="#{clienteController.excluir(cliente)}" 
+                                                         update="cliente" oncomplete="excluir.hide()" />
+                                        <p:commandLink value="Não" onclick="mensagem.hide()" />
+                                    </h:panelGrid>
+                                </h:form>    
+                            </p:dialog>
+                            </p:commandButton>
                         </p:column>
+                           
                     </p:dataTable>
                 </h:form>
             </p:layoutUnit>  

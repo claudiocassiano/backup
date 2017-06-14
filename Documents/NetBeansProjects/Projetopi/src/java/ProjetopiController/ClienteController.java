@@ -68,9 +68,10 @@ public class ClienteController {
     }
 
     public String excluir(Cliente cliente) {
-        Cliente Cliente = (Cliente)(listaCliente.getRowData());
         interfaceCliente dao = new ClienteDAO();
         dao.excluir(cliente);
+        getListaCliente();
+        Cliente Cliente = (Cliente)(listaCliente.getRowData());
         return "index";
         
     }
